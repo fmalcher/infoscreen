@@ -2,6 +2,8 @@
 error_reporting("E_ALL & ~E_NOTICE");
 ini_set('display_errors', 1);
 
+header("Content-Type: text/html");
+
 require_once("StationMonitor.class.php");
 require_once("Config.class.php");
 
