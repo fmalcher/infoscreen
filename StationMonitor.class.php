@@ -28,7 +28,14 @@ class StationMonitor{
 	}
 	
 	public function getStationName(){
-		return $this->data->stationName;
+		$name = $this->data->stationName;
+		
+		//cut away "Leipzig" from the beginning of the label
+		if(substr($name, 0, 9) == "Leipzig, "){
+			$name = substr($name, 9);
+		}
+		
+		return $name;
 	}
 	
 	public function getRequestTime(){
