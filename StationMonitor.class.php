@@ -21,8 +21,6 @@ class StationMonitor{
 		$resp = curl_exec($curl);
 		curl_close($curl);
 		$this->data = json_decode($resp);
-		
-		echo $clientID;
 	}
 	
 	public function getJourneys(){
@@ -32,6 +30,19 @@ class StationMonitor{
 	public function getStationName(){
 		return $this->data->stationName;
 	}
+	
+	public function getRequestTime(){
+		$date = explode("+", $data['requestTimeStamp']);
+		return strtotime($date[0].", ".$date[1]);
+	}
+	
+	public function getTable(){
+		
+	}
+	
+	
+	
+	
 	
 	
 	private function createClientID(){
