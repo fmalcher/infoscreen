@@ -11,8 +11,6 @@ class StationMonitor{
 	
 		$clientID = $this->createClientID();
 		
-		
-		
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
 	    	CURLOPT_RETURNTRANSFER => 1,

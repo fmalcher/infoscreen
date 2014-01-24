@@ -1,0 +1,68 @@
+body{
+	background: black;
+	text-align: center;
+	font-family: sans-serif;
+}
+
+table.plan{
+	margin: auto;
+	border-spacing: 5px 0 0 0;
+	padding: 0;
+}
+
+table.plan tr.planrow:nth-child(even){
+	background: #3a3a3a;
+}
+
+table.plan tr.planrow:nth-child(odd){
+	background: #565656;
+}
+
+td.icon{
+	color: white;
+	text-align: center;
+	vertical-align: middle;
+	width: 70px;
+	height: 70px;
+	font-size: 32px;
+	font-weight: bold;
+	
+}
+
+td.info{
+	width: 300px;
+	color: white;
+	padding: 7px 7px 7px 20px;
+}
+
+td.info div.time{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+td.info div.label{
+	font-size: 13px;
+}
+
+td.info div.time span.timeDiff{
+	color: #cb0e0e;
+	font-size: 14px;
+}
+
+div#curTime{
+	position:absolute;
+	right: 20px;
+	top: 20px;
+	color: white;
+	font-weight: bold;
+	font-size: 24px;
+}
+
+table.plan tr.headline td{
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	text-align: center;
+	height: 40px;
+	background-color: #707070;
+}
