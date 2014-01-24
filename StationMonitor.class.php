@@ -18,7 +18,7 @@ class StationMonitor{
 	    	CURLOPT_RETURNTRANSFER => 1,
 			CURLOPT_URL => $requestURI,
 			CURLOPT_USERAGENT => $useragent,
-			CURLOPT_HTTPHEADER => array("EasyGO-Client-ID: 61173728391672902674536", "Accept: application/json"),
+			CURLOPT_HTTPHEADER => array("EasyGO-Client-ID: ".$clientID, "Accept: application/json"),
 		));
 		$resp = curl_exec($curl);
 		curl_close($curl);
