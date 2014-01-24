@@ -23,7 +23,6 @@ $showmax = ($getshow >= 1) ? $getshow : Config::$pref['showmax'];
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <link rel="stylesheet" href="media/style.css" type="text/css">
 <meta http-equiv="refresh" content="10; URL=<?php echo $_SERVER['REQUEST_URI']; ?>">
-
 </head>
 
 <body>
