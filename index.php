@@ -7,8 +7,6 @@ require_once("Config.class.php");
 
 Config::init();
 
-
-
 //how many rows to show
 $getshow = intval($_GET['show']);
 $showmax = ($getshow >= 1) ? $getshow : Config::$pref['showmax'];
@@ -27,13 +25,6 @@ $showmax = ($getshow >= 1) ? $getshow : Config::$pref['showmax'];
 </head>
 
 <body>
-
-<div id="curTime">
-	<?php
-	echo date("H:i", $sm->getRequestTime());
-	?>
-</div>
-
 
 <table style="width: 100%;">
 <tr style="vertical-align: top;">
@@ -75,7 +66,7 @@ foreach(Config::$pref['stations'] AS $station){
 		$jo->timeDiff = ($jo->timeDiffValue) ? $jo->timeDiff : "";
 		
 		$search = array("{BGCOLOR}","{LINENUM}","{LABEL}","{TIME}","{TIMEDIFF}");
-		$replace = array("#".$jo->color, $jo->shortLabel, $jo->label, $jo->time, $jo->timeDiff);
+		$replace = array("#".$jo->color, $jo->shortLabel, $jo->label, $jo->time, $jo->timeiff);
 		$planrows[] = str_replace($search, $replace, $rowtpl);
 	}
 	
@@ -94,6 +85,14 @@ foreach(Config::$pref['stations'] AS $station){
 
 </tr>
 </table>
+
+
+<div id="curTime">
+	<?php
+	echo date("H:i", $sm->getRequestTime());
+	?>
+</div>
+
 
 
 </body>
