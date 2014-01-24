@@ -7,9 +7,6 @@ require_once("Config.class.php");
 
 Config::init();
 
-$sm = new StationMonitor("11330");
-
-
 
 
 //how many rows to show
