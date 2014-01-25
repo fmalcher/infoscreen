@@ -6,6 +6,7 @@ class Config{
 	public static function init(){
 		self::$pref = array(
 			"showmax"  => 10,
+			"refreshinterval" => 10,
 			"stations" => array(11330, 13007, 11343)
 		);
 	}
