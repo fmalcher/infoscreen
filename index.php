@@ -1,19 +1,6 @@
 <?php
-error_reporting("E_ALL & ~E_NOTICE");
-ini_set('display_errors', 1);
-
-header("Content-Type: text/html");
-
-require_once("StationMonitor.class.php");
 require_once("Config.class.php");
-
 Config::init();
-
-//how many rows to show
-$getshow = intval($_GET['show']);
-$showmax = ($getshow >= 1) ? $getshow : Config::$pref['showmax'];
-
-
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
        "http://www.w3.org/TR/html4/loose.dtd">
@@ -22,78 +9,85 @@ $showmax = ($getshow >= 1) ? $getshow : Config::$pref['showmax'];
 <title>MDV Fahrplan</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <link rel="stylesheet" href="media/style.css" type="text/css">
-<meta http-equiv="refresh" content="<?php echo Config::$pref['refreshinterval']; ?>; URL=<?php echo $_SERVER['REQUEST_URI']; ?>">
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+(function($)
+{
+    $(document).ready(function()
+    {
+        $.ajaxSetup(
+        {
+            cache: false,
+            beforeSend: function() {
+                $('#loading').show();
+            },
+            complete: function() {
+                $('#loading').hide();
+            },
+            success: function() {
+                $('#loading').hide();
+            }
+        });
+        var $content = $("#content");
+        $content.load("content.php");
+        var contentRefreshId = setInterval(function()
+        {
+            $content.load('content.php');
+        }, <?php echo Config::$pref['refreshplan'] * 1000 ?>);
+        
+        
+        var $temp = $("#temp");
+        $temp.load("metadata.php?get=temp");
+        var tempRefreshId = setInterval(function()
+        {
+            $temp.load("metadata.php?get=temp");
+        }, <?php echo Config::$pref['refreshtemp'] * 1000 ?>);
+    });
+})(jQuery);
+
+
+function showTime(){
+	var date=new Date();
+	var h = date.getHours();
+	var m = date.getMinutes();
+	
+	//always show two digits
+	h = checkTime(h);
+	m = checkTime(m);
+	$("#curTime").text(h + ":" + m);
+	t = setTimeout('showTime()',1000);
+}
+
+function checkTime(i){
+	if(i < 10){
+		i = "0" + i;
+	}
+	return i;
+}
+
+showTime();
+
+</script>
+
 </head>
 
 <body>
 
 <table style="width: 100%;">
-<tr style="vertical-align: top;">
+<tr id="content" style="vertical-align: top;">
 
-
-<?php
-foreach(Config::$pref['stations'] AS $station){
-	echo "<td>";
-	
-
-	$sm = new StationMonitor($station);
-	$journeys = $sm->getJourneys();
-
-
-	$tabletpl = Config::getTemplate("plantable"); 
-	$rowtpl   = Config::getTemplate("planrow");
-
-	
-	//decide how many rows to show
-	if(count($journeys) > $showmax){
-		$count = $showmax;
-	}else{
-		$count = count($journeys);
-	}
-	
-	
-	$planrows = array();
-	
-	//go through journeys
-	for($i = 0; $i < $count; $i++){
-		$jo = $journeys[$i];
-	
-		//cut away "Leipzig" from the beginning of the label
-		if(substr($jo->label, 0, 9) == "Leipzig, "){
-			$jo->label = substr($jo->label, 9);
-		}
-		
-		//only show timediff if not null
-		$jo->timeDiff = ($jo->timeDiffValue) ? $jo->timeDiff : "";
-		
-		$search = array("{BGCOLOR}","{LINENUM}","{LABEL}","{TIME}","{TIMEDIFF}");
-		$replace = array("#".$jo->color, $jo->shortLabel, $jo->label, $jo->time, $jo->timeDiff);
-		$planrows[] = str_replace($search, $replace, $rowtpl);
-	}
-	
-	
-	
-	$search = array("{STATIONNAME}", "{PLANROWS}");
-	$replace = array($sm->getStationName(), implode("\n", $planrows));
-	$table = str_replace($search, $replace, $tabletpl);
-	
-	echo $table;
-	
-	echo "</td>";
-}
-?>
 
 
 </tr>
 </table>
 
 
-<div id="curTime">
-	<?php
-	echo date("H:i", $sm->getRequestTime());
-	?>
-</div>
+<div id="curTime"></div>
+<div id="temp"></div>
 
+
+<div id="loading">Refreshing...</div>
 
 
 </body>
