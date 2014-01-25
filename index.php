@@ -22,7 +22,7 @@ $showmax = ($getshow >= 1) ? $getshow : Config::$pref['showmax'];
 <title>MDV Fahrplan</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <link rel="stylesheet" href="media/style.css" type="text/css">
-<meta http-equiv="refresh" content="<?php echo Config::$pref['refreshinterval']; ?> URL=<?php echo $_SERVER['REQUEST_URI']; ?>">
+<meta http-equiv="refresh" content="<?php echo Config::$pref['refreshinterval']; ?>; URL=<?php echo $_SERVER['REQUEST_URI']; ?>">
 </head>
 
 <body>
