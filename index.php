@@ -12,35 +12,30 @@ Config::init();
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
-(function($)
-{
-    $(document).ready(function()
-    {
-        $.ajaxSetup(
-        {
+(function($){
+    $(document).ready(function(){
+        $.ajaxSetup({
             cache: false,
-            beforeSend: function() {
+            beforeSend: function(){
                 $('#loading').show();
             },
-            complete: function() {
+            complete: function(){
                 $('#loading').hide();
             },
-            success: function() {
+            success: function(){
                 $('#loading').hide();
             }
         });
         var $content = $("#content");
         $content.load("content.php");
-        var contentRefreshId = setInterval(function()
-        {
+        var contentRefreshId = setInterval(function(){
             $content.load('content.php');
         }, <?php echo Config::$pref['refreshplan'] * 1000 ?>);
         
         
         var $temp = $("#temp");
         $temp.load("metadata.php?get=temp");
-        var tempRefreshId = setInterval(function()
-        {
+        var tempRefreshId = setInterval(function(){
             $temp.load("metadata.php?get=temp");
         }, <?php echo Config::$pref['refreshtemp'] * 1000 ?>);
     });
