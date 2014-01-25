@@ -67,7 +67,7 @@ foreach(Config::$pref['stations'] AS $station){
 		$jo->timeDiff = ($jo->timeDiffValue) ? $jo->timeDiff : "";
 		
 		$search = array("{BGCOLOR}","{LINENUM}","{LABEL}","{TIME}","{TIMEDIFF}");
-		$replace = array("#".$jo->color, $jo->shortLabel, $jo->label, $jo->time, $jo->timeiff);
+		$replace = array("#".$jo->color, $jo->shortLabel, $jo->label, $jo->time, $jo->timeDiff);
 		$planrows[] = str_replace($search, $replace, $rowtpl);
 	}
 	
