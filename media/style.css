@@ -83,3 +83,21 @@ table.plan tr.headline td{
 	height: 40px;
 	background-color: #707070;
 }
+
+
+div.news_wrapper li{
+	width: 100%;
+}
+
+ul#news_content li{
+	color: white;
+	list-style: none;
+	text-align: center;
+	font-size: 14px;
+}
+
+ul#news_content li h2{
+	font-size: 18px;
+	font-weight: bold;
+	margin: 0;
+}

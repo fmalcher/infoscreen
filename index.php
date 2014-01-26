@@ -11,6 +11,8 @@ Config::init();
 <link rel="stylesheet" href="media/style.css" type="text/css">
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="media/jquery.newsfade.1.0.js"></script>
+
 <script>
 (function($){
     $(document).ready(function(){
@@ -26,22 +28,48 @@ Config::init();
                 $('#loading').hide();
             }
         });
-        var $content = $("#content");
-        $content.load("content.php");
+
+		//plan table refresh
+        $("#content").load("content.php");
         var contentRefreshId = setInterval(function(){
-            $content.load('content.php');
+            $("#content").load('content.php');
         }, <?php echo Config::$pref['refreshplan'] * 1000 ?>);
         
         
-        var $temp = $("#temp");
-        $temp.load("metadata.php?get=temp");
+		//temperature refresh
+        $("#temp").load("metadata.php?get=temp");
         var tempRefreshId = setInterval(function(){
-            $temp.load("metadata.php?get=temp");
+            $("#temp").load("metadata.php?get=temp");
         }, <?php echo Config::$pref['refreshtemp'] * 1000 ?>);
+        
+        
+        loadnews();
+        showTime();
+        
     });
 })(jQuery);
 
 
+//load news and start fading
+function loadnews(){
+	$("#news_content").load("news.php", function(){
+		$('#news_content li').hide();
+		fadeinout($('#news_content li:first'));
+	});
+}
+
+//function for fading news elements      
+function fadeinout(e){
+	e.delay().fadeIn().delay(<?php echo Config::$pref['refreshnews'] * 1000 ?>).fadeOut(function(){
+		if(e.next().length > 0){
+			fadeinout(e.next());
+		}else{
+			loadnews();
+		}
+	});	
+}
+
+//show system time
 function showTime(){
 	var date=new Date();
 	var h = date.getHours();
@@ -54,14 +82,13 @@ function showTime(){
 	t = setTimeout('showTime()',1000);
 }
 
+//helper function: add 0 so that there are always two digits
 function checkTime(i){
 	if(i < 10){
 		i = "0" + i;
 	}
 	return i;
 }
-
-showTime();
 
 </script>
 
@@ -70,12 +97,13 @@ showTime();
 <body>
 
 <table style="width: 100%;">
-<tr id="content" style="vertical-align: top;">
-
-
-
-</tr>
+<tr id="content" style="vertical-align: top;"></tr>
 </table>
+
+
+<div class="news_wrapper">
+	<ul id="news_content"></ul>
+</div>
 
 
 <div id="curTime"></div>

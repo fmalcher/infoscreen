@@ -5,9 +5,10 @@ class Config{
 	
 	public static function init(){
 		self::$pref = array(
-			"showmax"  => 10,
-			"refreshplan" => 10,
+			"showmax"  => 8,
+			"refreshplan" => 30,
 			"refreshtemp" => 300,
+			"refreshnews" => 8,
 			"stations" => array(11330, 13007, 11343),
 			"weather_location" => "51.342065,12.377057"
 		);
