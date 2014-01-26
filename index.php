@@ -6,7 +6,7 @@ Config::init();
        "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>MDV Fahrplan</title>
+<title>Infoscreen</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <link rel="stylesheet" href="media/style.css" type="text/css">
 

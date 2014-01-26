@@ -16,9 +16,4 @@ if($get == "temp"){
 	echo $temp;
 }
 
-if($get == "time"){
-	echo date("H:i");
-}
-
-
 ?>

@@ -5,10 +5,10 @@ Config::init();
 
 
 $rss = new lastRSS();
-$rss->cache_dir = '';
-$rss->cache_time = 0;
-$rss->cp = 'UTF-8';
-$rss->date_format = 'l';
+$rss->cache_dir   = "";
+$rss->cache_time  = 0;
+$rss->cp          = "UTF-8";
+$rss->date_format = "l";
 
 if($rs = $rss->get(Config::$pref['rssurl'])){
 	foreach($rs['items'] AS $item){

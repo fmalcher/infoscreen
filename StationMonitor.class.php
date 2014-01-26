@@ -38,20 +38,6 @@ class StationMonitor{
 		return $name;
 	}
 	
-	public function getRequestTime(){
-		$date = explode("+", $data['requestTimeStamp']);
-		return strtotime($date[0].", ".$date[1]);
-	}
-	
-	public function getTable(){
-		
-	}
-	
-	
-	
-	
-	
-	
 	private function createClientID(){
 		$out = null;
 		
