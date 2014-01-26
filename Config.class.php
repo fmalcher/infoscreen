@@ -5,12 +5,13 @@ class Config{
 	
 	public static function init(){
 		self::$pref = array(
+			"stations" => array(11330, 13007, 11343),
 			"showmax"  => 8,
+			"weather_location" => "51.342065,12.377057",
+			"rssurl" => "http://www.tagesschau.de/xml/rss2",
 			"refreshplan" => 30,
 			"refreshtemp" => 300,
 			"refreshnews" => 8,
-			"stations" => array(11330, 13007, 11343),
-			"weather_location" => "51.342065,12.377057"
 		);
 	}
 	
