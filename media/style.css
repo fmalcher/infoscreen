@@ -89,6 +89,11 @@ div.news_wrapper li{
 	width: 100%;
 }
 
+ul#news_content{
+	padding: 0;
+	margin: 20px 25px 0;
+}
+
 ul#news_content li{
 	color: white;
 	list-style: none;
