@@ -10,12 +10,15 @@ $rss->cache_time  = 0;
 $rss->cp          = "UTF-8";
 $rss->date_format = "l";
 
+
 if($rs = $rss->get(Config::$pref['rssurl'])){
 	foreach($rs['items'] AS $item){
-		echo "<li>\n";
-		echo "<h2>".$item['title']."</h2>\n";
-		echo $item['description'];
-		echo "</li>\n";
+		if(!Config::$pref['tagesschau_onlytoday'] OR ($item['pubDate'] == $rs['lastBuildDate'])){ //only show posts from today
+			echo "<li>\n";
+			echo "<h2>".$item['title']."</h2>\n";
+			echo $item['description'];
+			echo "</li>\n";
+		}
 	}
 }
 

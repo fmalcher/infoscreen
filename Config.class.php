@@ -8,6 +8,7 @@ class Config{
 			"showmax"  => 7,
 			"weather_location" => "51.342065,12.377057",
 			"rssurl" => "http://www.tagesschau.de/xml/rss2",
+			"tagesschau_onlytoday" => 1, //only show today's posts from Tagesschau RSS feed
 			"refreshplan" => 30,
 			"refreshtemp" => 300,
 			"refreshnews" => 9,
